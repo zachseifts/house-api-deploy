@@ -15,7 +15,7 @@ spec:
           service:
             name: house-api-service
             port:
-              number: 4000
+              number: 5000
         pathType: Prefix
 ---
 apiVersion: v1
@@ -27,8 +27,8 @@ metadata:
 spec:
   ports:
   - protocol: TCP
-    port: 4000
-    targetPort: 4000
+    port: 5000
+    targetPort: 5000
   selector:
     component: api
   type: LoadBalancer
@@ -53,4 +53,4 @@ spec:
         - name: house-api-image
           image: localhost:32000/house_api:latest
           ports:
-            - containerPort: 4000
+            - containerPort: 5000
