@@ -30,7 +30,7 @@ spec:
     port: 5000
     targetPort: 5000
   selector:
-    component: api
+    component: house-api
   type: ClusterIP
 ---
 apiVersion: apps/v1
