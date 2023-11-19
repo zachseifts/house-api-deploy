@@ -4,13 +4,17 @@ metadata:
   name: house-api-lights-ingress
   labels:
     component: house-api-lights
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: public
   rules:
   - host: api.home.seifts.us
     http:
       paths:
-      - path: /lights/
+      - path: /lights(/|$)(.*)
+        pathType: ImplementationSpecific
         backend:
           service:
             name: house-api-lights-service
