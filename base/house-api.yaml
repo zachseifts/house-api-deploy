@@ -20,7 +20,6 @@ spec:
             name: house-api-lights-service
             port:
               number: 5000
-        pathType: Prefix
 ---
 apiVersion: v1
 kind: Service
