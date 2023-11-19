@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata: 
+  name: house-api
+  namespace: argocd
+spec:
+  description: An argocd app project for hosting a local house-api instance
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - name: '*'
+    namespace: '*'
+    server: https://kubernetes.default.svc
+  sourceRepos:
+  - https://github.com/zachseifts/dashboard.git
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: house-api
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/zachseifts/house-api-deploy.git
+      revision: HEAD
+      directories:
+        - path: environments/*
+  template:
+    metadata:
+      name: 'house-api-{{path.basename}}'
+    spec:
+      project: house-api
+      source:
+        repoURL: https://github.com/zachseifts/house-api-deploy.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'house-api-{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
