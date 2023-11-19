@@ -1,19 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: house-api-ingress
+  name: house-api-lights-ingress
   labels:
-    component: house-api
+    component: house-api-lights
 spec:
   ingressClassName: public
   rules:
   - host: api.home.seifts.us
     http:
       paths:
-      - path: /
+      - path: /lights/
         backend:
           service:
-            name: house-api-service
+            name: house-api-lights-service
             port:
               number: 5000
         pathType: Prefix
@@ -21,36 +21,36 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: house-api-service
+  name: house-api-lights-service
   labels:
-    component: house-api
+    component: house-api-lights
 spec:
   ports:
   - protocol: TCP
     port: 5000
     targetPort: 5000
   selector:
-    component: house-api
+    component: house-api-lights
   type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: house-api-deployment
+  name: house-api-lights-deployment
   labels:
-    component: house-api
+    component: house-api-lights
 spec:
   selector:
     matchLabels:
-      component: house-api
+      component: house-api-lights
   replicas: 1
   template:
     metadata:
       labels:
-        component: house-api
+        component: house-api-lights
     spec:
       containers:
-        - name: house-api-image
-          image: localhost:32000/house_api:latest
+        - name: house-api-lights-image
+          image: localhost:32000/house_api_lights:latest
           ports:
             - containerPort: 5000
