@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-  - host: dev.api.home.seifts.us
+  - host: api.home.seifts.us
     http:
       paths:
       - path: /
