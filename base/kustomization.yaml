@@ -3,4 +3,5 @@ kind: Kustomization
 metadata:
   name: house-api
 resources:
+ - namespace.yaml
  - house-api.yaml
