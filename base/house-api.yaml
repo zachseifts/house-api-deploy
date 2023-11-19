@@ -1,0 +1,56 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: house-api-ingress
+  labels:
+    component: house-api
+spec:
+  ingressClassName: public
+  rules:
+  - host: dev.api.home.seifts.us
+    http:
+      paths:
+      - path: /
+        backend:
+          service:
+            name: house-api-service
+            port:
+              number: 4000
+        pathType: Prefix
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: house-api-service
+  labels:
+    component: house-api
+spec:
+  ports:
+  - protocol: TCP
+    port: 4000
+    targetPort: 4000
+  selector:
+    component: api
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: house-api-deployment
+  labels:
+    component: house-api
+spec:
+  selector:
+    matchLabels:
+      component: house-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: house-api
+    spec:
+      containers:
+        - name: house-api-image
+          image: python:alpine
+          ports:
+            - containerPort: 4000
