@@ -54,6 +54,6 @@ spec:
     spec:
       containers:
         - name: house-api-lights-image
-          image: localhost:32000/house_api_lights:latest
+          image: localhost:32000/house_api_lights:1.0
           ports:
             - containerPort: 5000
