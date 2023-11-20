@@ -25,7 +25,7 @@ spec:
       repoURL: https://github.com/zachseifts/house-api-deploy.git
       revision: HEAD
       directories:
-        - path: environments/*
+        - path: overlays/*
   template:
     metadata:
       name: 'house-api-{{path.basename}}'
