@@ -46,7 +46,7 @@ spec:
   selector:
     matchLabels:
       component: house-api-weather
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:

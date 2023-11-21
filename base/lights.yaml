@@ -46,7 +46,7 @@ spec:
   selector:
     matchLabels:
       component: house-api-lights
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
