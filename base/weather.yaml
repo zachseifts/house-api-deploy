@@ -54,6 +54,6 @@ spec:
     spec:
       containers:
         - name: house-api-weather-image
-          image: localhost:32000/house_api_weather:1.0
+          image: localhost:32000/house_api_weather:1.1
           ports:
             - containerPort: 5000
