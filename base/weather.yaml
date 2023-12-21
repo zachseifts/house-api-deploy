@@ -67,11 +67,16 @@ spec:
       labels:
         component: house-api-weather
     spec:
+      imagePullSecrets:
+        - name: ghcr-argocd-login
       containers:
         - name: house-api-weather-image
           image: localhost:32000/house_api_weather:1.1
           ports:
             - containerPort: 5000
+      intContainers:
+        - name: house-api-weather-cache-warmer
+          image: ghcr.io/zachseifts/house-weather-noaa-api:latest
 ---
 apiVersion: apps/v1
 kind: Deployment
