@@ -74,7 +74,7 @@ spec:
           image: localhost:32000/house_api_weather:1.1
           ports:
             - containerPort: 5000
-      intContainers:
+      initContainers:
         - name: house-api-weather-cache-warmer
           image: ghcr.io/zachseifts/house-weather-noaa-api:latest
           env:
