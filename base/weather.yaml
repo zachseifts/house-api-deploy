@@ -36,6 +36,21 @@ spec:
     component: house-api-weather
   type: ClusterIP
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-forecast-cache-internal-service
+  labels:
+    component: house-api-weather
+spec:
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379
+  selector:
+    component: house-api-weather
+  type: ClusterIP
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -57,3 +72,33 @@ spec:
           image: localhost:32000/house_api_weather:1.1
           ports:
             - containerPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: house-api-weather-cache
+  labels:
+    component: house-api-weather
+spec:
+  selector:
+    matchLabels:
+      component: house-api-weather
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: house-api-weather
+    spec:
+      containers:
+        - name: redis
+          image: redis:alpine
+          command:
+            - redis-server
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - mountPath: /redis-data
+              name: house-api-weather-cache-data
+      volumes:
+        - name: house-api-weather-cache-data
+          emptyDir: {}
