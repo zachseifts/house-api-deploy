@@ -74,6 +74,17 @@ spec:
           image: ghcr.io/zachseifts/house-api-weather-backend:latest
           ports:
             - containerPort: 5000
+          env:
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: "house-api-weather-config"
+                  key: redis-url
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: "house-api-weather-config"
+                  key: redis-port
       initContainers:
         - name: house-api-weather-cache-warmer
           image: ghcr.io/zachseifts/house-weather-noaa-api:latest
@@ -83,6 +94,11 @@ spec:
                 configMapKeyRef:
                   name: "house-api-weather-config"
                   key: redis-url
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: "house-api-weather-config"
+                  key: redis-port
             - name: LAT
               valueFrom:
                 configMapKeyRef:
@@ -149,6 +165,11 @@ spec:
                     configMapKeyRef:
                       name: "house-api-weather-config"
                       key: redis-url
+                - name: REDIS_PORT
+                  valueFrom:
+                    configMapKeyRef:
+                      name: "house-api-weather-config"
+                      key: redis-port
                 - name: LAT
                   valueFrom:
                     configMapKeyRef:

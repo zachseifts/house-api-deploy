@@ -10,5 +10,6 @@ configMapGenerator:
   - name: house-api-weather-config
     literals:
       - redis-url="dev-weather-forecast-cache-internal-service"
+      - redis-port=6379
       - lat=36.2162
       - lon=-81.6777
