@@ -92,7 +92,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: house-api-weather-config
-                  key: LON
+                  key: lon
 ---
 apiVersion: apps/v1
 kind: Deployment
