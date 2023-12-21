@@ -102,3 +102,29 @@ spec:
       volumes:
         - name: house-api-weather-cache-data
           emptyDir: {}
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: house-api-weather-cache-job
+  labels:
+    component: house-api-weather
+spec:
+  schedule: '@hourly'
+  successfulJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+            - name: ghcr-argocd-login
+          containers:
+            - name: house-weather-noaa-api
+              image: ghcr.io/zachseifts/house-weather-noaa-api:latest
+#             env:
+#               - name: REDIS_URL
+#                 valueFrom:
+#                   configMapKeyRef:
+#                     name: jobs-config
+#                     key: redis-url
+#         restartPolicy: OnFailure
