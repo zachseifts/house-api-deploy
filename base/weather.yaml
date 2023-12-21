@@ -71,7 +71,8 @@ spec:
         - name: ghcr-argocd-login
       containers:
         - name: house-api-weather-image
-          image: ghcr.io/zachseifts/house-api-weather-backend:latest
+         #image: ghcr.io/zachseifts/house-api-weather-backend:latest
+          image: redis:alpine
           ports:
             - containerPort: 5000
           env:
