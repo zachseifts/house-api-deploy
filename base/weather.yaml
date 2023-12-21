@@ -61,7 +61,7 @@ spec:
   selector:
     matchLabels:
       component: house-api-weather
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -77,6 +77,22 @@ spec:
       intContainers:
         - name: house-api-weather-cache-warmer
           image: ghcr.io/zachseifts/house-weather-noaa-api:latest
+          env:
+            - name: REDIS_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: house-api-weather-config
+                  key: redis-url
+            - name: LAT
+              valueFrom:
+                configMapKeyRef:
+                  name: house-api-weather-config
+                  key: lat
+            - name: LON
+              valueFrom:
+                configMapKeyRef:
+                  name: house-api-weather-config
+                  key: LON
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -126,10 +142,20 @@ spec:
           containers:
             - name: house-weather-noaa-api
               image: ghcr.io/zachseifts/house-weather-noaa-api:latest
-#             env:
-#               - name: REDIS_URL
-#                 valueFrom:
-#                   configMapKeyRef:
-#                     name: jobs-config
-#                     key: redis-url
+              env:
+                - name: REDIS_URL
+                  valueFrom:
+                    configMapKeyRef:
+                      name: house-api-weather-config
+                      key: redis-url
+                - name: LAT
+                  valueFrom:
+                    configMapKeyRef:
+                      name: house-api-weather-config
+                      key: lat
+                - name: LON
+                  valueFrom:
+                    configMapKeyRef:
+                      name: house-api-weather-config
+                      key: LON
           restartPolicy: OnFailure
