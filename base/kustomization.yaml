@@ -9,6 +9,6 @@ resources:
 configMapGenerator:
   - name: house-api-weather-config
     literals:
-      - redis-url="weather-forecast-cache-internal-service"
+      - redis-url="dev-weather-forecast-cache-internal-service"
       - lat=36.1
       - lon=-80.2412
