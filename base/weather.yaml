@@ -157,5 +157,5 @@ spec:
                   valueFrom:
                     configMapKeyRef:
                       name: house-api-weather-config
-                      key: LON
+                      key: lon
           restartPolicy: OnFailure
