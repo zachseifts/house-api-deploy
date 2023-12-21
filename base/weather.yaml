@@ -86,30 +86,30 @@ spec:
                 configMapKeyRef:
                   name: "house-api-weather-config"
                   key: redis-port
-      initContainers:
-        - name: house-api-weather-cache-warmer
-          image: ghcr.io/zachseifts/house-weather-noaa-api:latest
-          env:
-            - name: REDIS_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: "house-api-weather-config"
-                  key: redis-url
-            - name: REDIS_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: "house-api-weather-config"
-                  key: redis-port
-            - name: LAT
-              valueFrom:
-                configMapKeyRef:
-                  name: "house-api-weather-config"
-                  key: lat
-            - name: LON
-              valueFrom:
-                configMapKeyRef:
-                  name: "house-api-weather-config"
-                  key: lon
+#     initContainers:
+#       - name: house-api-weather-cache-warmer
+#         image: ghcr.io/zachseifts/house-weather-noaa-api:latest
+#         env:
+#           - name: REDIS_URL
+#             valueFrom:
+#               configMapKeyRef:
+#                 name: "house-api-weather-config"
+#                 key: redis-url
+#           - name: REDIS_PORT
+#             valueFrom:
+#               configMapKeyRef:
+#                 name: "house-api-weather-config"
+#                 key: redis-port
+#           - name: LAT
+#             valueFrom:
+#               configMapKeyRef:
+#                 name: "house-api-weather-config"
+#                 key: lat
+#           - name: LON
+#             valueFrom:
+#               configMapKeyRef:
+#                 name: "house-api-weather-config"
+#                 key: lon
 ---
 apiVersion: apps/v1
 kind: Deployment
