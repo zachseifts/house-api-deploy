@@ -127,4 +127,4 @@ spec:
 #                   configMapKeyRef:
 #                     name: jobs-config
 #                     key: redis-url
-#         restartPolicy: OnFailure
+          restartPolicy: OnFailure
