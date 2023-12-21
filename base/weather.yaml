@@ -131,8 +131,8 @@ metadata:
   labels:
     component: house-api-weather
 spec:
-  schedule: '@hourly'
-# schedule: '* * * * *'
+# schedule: '@hourly'
+  schedule: '* * * * *'
   successfulJobsHistoryLimit: 5
   jobTemplate:
     spec:
