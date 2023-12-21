@@ -146,16 +146,16 @@ spec:
                 - name: REDIS_URL
                   valueFrom:
                     configMapKeyRef:
-                      name: house-api-weather-config
+                      name: "house-api-weather-config"
                       key: redis-url
                 - name: LAT
                   valueFrom:
                     configMapKeyRef:
-                      name: house-api-weather-config
+                      name: "house-api-weather-config"
                       key: lat
                 - name: LON
                   valueFrom:
                     configMapKeyRef:
-                      name: house-api-weather-config
+                      name: "house-api-weather-config"
                       key: lon
           restartPolicy: OnFailure
